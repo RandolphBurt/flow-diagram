@@ -4,6 +4,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 
 import { Shape } from './shape';
+import { SelectBox } from './select-box';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit {
 
   shapes: Shape[];
   selectedShape : Shape = null;
+  selectBox: SelectBox = null;
 
   constructor() {
     this.shapes = [];
@@ -35,7 +37,7 @@ export class AppComponent implements OnInit {
       .filter(() => this.selectedShape !== null)
       .subscribe((event : any) => {
         this.selectedShape.x = event.pageX;
-        this.selectedShape.y = event.pageY; //clientY
+        this.selectedShape.y = event.pageY;
       });
   }
 
