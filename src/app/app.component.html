@@ -1,7 +1,4 @@
-<h1>
-  {{title}}
-</h1>
-
-<svg width="100%" height="100">
-  <circle [attr.cx]="x" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" (click)="select()" />
+<svg width="100%" height="800">
+  <circle  *ngFor="let shape of shapes" [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius" [attr.stroke]="shape.strokeColour" 
+                                        [attr.stroke-width]="shape.strokeWidth" [attr.fill]="shape.fillColour" />
 </svg>
