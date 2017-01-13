@@ -43,7 +43,6 @@ export class FlowDragAndDropDirective implements OnInit {
         return drag;
       })
       .subscribe((event : any) => {
-        console.log(event);
         this.shape.x = event.pageX;
         this.shape.y = event.pageY;
       });    

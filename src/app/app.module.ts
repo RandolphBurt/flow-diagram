@@ -5,18 +5,21 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { FlowDragAndDropDirective } from './flow-drag-and-drop.directive';
+import { SelectBoxComponentComponent } from './select-box-component/select-box-component.component';
+import { DocumentService } from './document.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FlowDragAndDropDirective
+    FlowDragAndDropDirective,
+    SelectBoxComponentComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [DocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

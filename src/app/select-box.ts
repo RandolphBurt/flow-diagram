@@ -1,18 +1,14 @@
-export class Rectangle {
+export class SelectBox {
     private x2: number;
     private y2: number;
     private startX: number;
     private startY: number;
+    width: number;
+    height: number;
 
-    constructor(
-        public x: number, 
-        public y: number, 
-        public width: number,
-        public height: number,
-        public opacity: number,
-        public strokeColour: string) {
-            this.startX = x;
-            this.startY = y;
+    constructor(public x: number, public y: number) {
+        this.startX = x;
+        this.startY = y;
     }    
 
     setClosingCoordinates(x: number, y: number) {
