@@ -1,6 +1,7 @@
 <svg width="100%" height="800">
-  <circle *ngFor="let shape of shapes" [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius" [attr.stroke]="shape.strokeColour" 
+  <circle *ngFor="let shape of shapes" [flowDragAndDrop]="shape" [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius" [attr.stroke]="shape.strokeColour" 
                                         [attr.stroke-width]="shape.strokeWidth" [attr.fill]="shape.fillColour" />
 
-  <rect ng-if="selectBox" [attr.x]="selectBox?.x" [attr.y]="selectBox?.y" [attr.width]="selectBox?.width" [attr.height]="selectBox?.height"/>  
+  <rect ng-if="selectBox" [attr.x]="selectBox?.x" [attr.y]="selectBox?.y" [attr.width]="selectBox?.width" [attr.height]="selectBox?.height"
+        [attr.fill-opacity]="selectBox?.opacity" [attr.stroke]="selectBox?.strokeColour"/>  
 </svg>

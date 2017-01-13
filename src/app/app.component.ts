@@ -4,7 +4,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 
 import { Shape } from './shape';
-import { SelectBox } from './select-box';
+import { Rectangle } from './rectangle';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +15,13 @@ export class AppComponent implements OnInit {
 
   shapes: Shape[];
   selectedShape : Shape = null;
-  selectBox: SelectBox = null;
+  selectBox: Rectangle = null;
 
   constructor() {
     this.shapes = [];
     this.shapes.push(new Shape(50, 50, 40, 4, "green", "yellow"));
     this.shapes.push(new Shape(150, 150, 20, 2, "blue", "red"));
+    this.shapes.push(new Shape(200, 200, 40, 4, "red", "orange"));
   }
 
   ngOnInit() {
@@ -29,15 +30,20 @@ export class AppComponent implements OnInit {
     let mouseDown = Observable.fromEvent(document, 'mousedown');
 
     mouseDown
+      .map((event : MouseEvent) => {
+        this.selectBox = this.findShape(event) == null 
+          ? this.selectBox = new Rectangle(event.pageX, event.pageY, 0, 0, 0, "black") 
+          : null;
+        return event;
+      })
       .switchMap((event : MouseEvent) => {
-        this.selectedShape = this.findShape(event);
         var drag = mouseMove.takeUntil(mouseUp);
         return drag;
       })
-      .filter(() => this.selectedShape !== null)
       .subscribe((event : any) => {
-        this.selectedShape.x = event.pageX;
-        this.selectedShape.y = event.pageY;
+        if (this.selectBox !== null) {
+          this.selectBox.setClosingCoordinates(event.pageX, event.pageY);
+        }
       });
   }
 
