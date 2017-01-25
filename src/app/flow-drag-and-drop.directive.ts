@@ -14,7 +14,7 @@ export class FlowDragAndDropDirective implements OnInit {
   mouseMove: EventEmitter<MouseEvent>;
   mouseUp: EventEmitter<MouseEvent>;
 
-  @Input('flowDragAndDrop') shape: Shape;
+  @Input() shape: Shape;
 
   @HostListener('mousedown', ['$event']) onMouseDown(event: MouseEvent) {
     this.mouseDown.emit(event);
