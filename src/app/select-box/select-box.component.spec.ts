@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SelectBoxComponentComponent } from './select-box-component.component';
+import { SelectBoxComponent } from './select-box.component';
 
-describe('SelectBoxComponentComponent', () => {
-  let component: SelectBoxComponentComponent;
-  let fixture: ComponentFixture<SelectBoxComponentComponent>;
+describe('SelectBoxComponent', () => {
+  let component: SelectBoxComponent;
+  let fixture: ComponentFixture<SelectBoxComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectBoxComponentComponent ]
+      declarations: [ SelectBoxComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectBoxComponentComponent);
+    fixture = TestBed.createComponent(SelectBoxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

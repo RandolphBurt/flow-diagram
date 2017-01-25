@@ -5,14 +5,14 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { FlowDragAndDropDirective } from './flow-drag-and-drop.directive';
-import { SelectBoxComponentComponent } from './select-box-component/select-box-component.component';
+import { SelectBoxComponent } from './select-box/select-box.component';
 import { DocumentService } from './document.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlowDragAndDropDirective,
-    SelectBoxComponentComponent
+    SelectBoxComponent
   ],
   imports: [
     BrowserModule,

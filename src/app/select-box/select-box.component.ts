@@ -7,12 +7,12 @@ import { SelectBox } from '../select-box';
 import { DocumentService } from '../document.service';
 
 @Component({
-  selector: '[app-select-box-component]',
-  templateUrl: './select-box-component.component.html',
-  styleUrls: ['./select-box-component.component.css']
+  selector: '[app-select-box]',
+  templateUrl: './select-box.component.html',
+  styleUrls: ['./select-box.component.css']
 })
 @Injectable()
-export class SelectBoxComponentComponent implements OnInit {
+export class SelectBoxComponent implements OnInit {
   selectBox: SelectBox = null;
 
   constructor(private documentService: DocumentService) { }

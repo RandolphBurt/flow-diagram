@@ -1,6 +1,6 @@
 <svg width="100%" height="800">
-  <g app-select-box-component></g>
-
   <svg:circle *ngFor="let shape of documentService.shapes" [flowDragAndDrop]="shape" [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius" [attr.stroke]="shape.strokeColour" 
                                         [attr.stroke-width]="shape.strokeWidth" [attr.fill]="shape.fillColour" />
+
+  <g app-select-box-component></g>
 </svg>
