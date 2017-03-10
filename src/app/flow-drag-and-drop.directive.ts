@@ -5,6 +5,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 
 import { Shape } from './shape';
+import { DocumentService } from "app/document.service";
 
 @Directive({
   selector: '[flowDragAndDrop]'
@@ -30,21 +31,24 @@ export class FlowDragAndDropDirective implements OnInit {
     this.mouseUp.emit(event);
   }
 
-  constructor() {
+  constructor(private documentService: DocumentService) {
     this.mouseDown = new EventEmitter<MouseEvent>();
     this.mouseMove = new EventEmitter<MouseEvent>();
     this.mouseUp = new EventEmitter<MouseEvent>();
   }
 
   ngOnInit() {
+    var finished = this.mouseUp.map((event: any) => {
+      this.shape.showShapeSelector = true;
+    });
+
     this.mouseDown
       .switchMap((event : MouseEvent) => {
-        var drag = this.mouseMove.takeUntil(this.mouseUp);
+        var drag = this.mouseMove.takeUntil(finished);
         return drag;
       })
       .subscribe((event : any) => {
-        this.shape.x = event.pageX;
-        this.shape.y = event.pageY;
+        this.shape.moveTo(event.pageX, event.pageY);
       });    
   }
 }

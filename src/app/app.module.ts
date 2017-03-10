@@ -8,13 +8,17 @@ import { FlowDragAndDropDirective } from './flow-drag-and-drop.directive';
 import { SelectBoxComponent } from './select-box/select-box.component';
 import { DocumentService } from './document.service';
 import { ShapeComponent } from './shape/shape.component';
+import { ActivateShapeSelectorDirective } from './activate-shape-selector.directive';
+import { DeactivateShapeSelectorDirective } from './deactivate-shape-selector.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlowDragAndDropDirective,
     SelectBoxComponent,
-    ShapeComponent
+    ShapeComponent,
+    ActivateShapeSelectorDirective,
+    DeactivateShapeSelectorDirective
   ],
   imports: [
     BrowserModule,

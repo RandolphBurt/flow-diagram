@@ -24,7 +24,7 @@ export class SelectBoxComponent implements OnInit {
 
     mouseDown
       .map((event : MouseEvent) => {       
-        this.selectBox = this.documentService.findShape(event) == null 
+        this.selectBox = this.documentService.isEmptyPartOfCanvas(event.pageX, event.pageY) 
           ? this.selectBox = new SelectBox(event.pageX, event.pageY) 
           : null;
         return event;
