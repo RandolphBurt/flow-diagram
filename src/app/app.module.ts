@@ -10,6 +10,9 @@ import { DocumentService } from './document.service';
 import { ShapeComponent } from './shape/shape.component';
 import { ActivateShapeSelectorDirective } from './activate-shape-selector.directive';
 import { DeactivateShapeSelectorDirective } from './deactivate-shape-selector.directive';
+import { ShapeSelectorComponent } from './shape-selector/shape-selector.component';
+import { ConstantsService } from "app/constants.service";
+import { ShapeSelectorListComponent } from './shape-selector-list/shape-selector-list.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +21,16 @@ import { DeactivateShapeSelectorDirective } from './deactivate-shape-selector.di
     SelectBoxComponent,
     ShapeComponent,
     ActivateShapeSelectorDirective,
-    DeactivateShapeSelectorDirective
+    DeactivateShapeSelectorDirective,
+    ShapeSelectorComponent,
+    ShapeSelectorListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [DocumentService],
+  providers: [DocumentService, ConstantsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

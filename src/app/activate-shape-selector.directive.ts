@@ -26,7 +26,6 @@ export class ActivateShapeSelectorDirective implements OnInit {
     this.hover.subscribe((event : any) => {
       if (event.buttons === 0) {
         this.documentService.setActiveShapeSelectorShape(this.shape);
-        this.shape.showShapeSelector = true;
       }
     });    
   }

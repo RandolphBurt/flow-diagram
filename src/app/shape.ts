@@ -14,6 +14,5 @@ export class Shape {
     public moveTo(x: number, y: number) {
         this.x = x;
         this.y = y;
-        this.showShapeSelector = false;
     }
 }

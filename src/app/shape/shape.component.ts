@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Shape } from '../shape'
+import { ConstantsService } from "app/constants.service";
 
 @Component({
   selector: '[app-shape]',
@@ -9,7 +10,9 @@ import { Shape } from '../shape'
 export class ShapeComponent implements OnInit {
   @Input('app-shape') shape: Shape;
 
-  constructor() { }
+  shapeSelectorAdditionalDistance: number = this.constantsService.shapeSelectorAdditionalDistance;
+
+  constructor(private constantsService: ConstantsService) { }
 
   ngOnInit() {
   }

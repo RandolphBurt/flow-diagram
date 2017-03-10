@@ -39,7 +39,7 @@ export class FlowDragAndDropDirective implements OnInit {
 
   ngOnInit() {
     var finished = this.mouseUp.map((event: any) => {
-      this.shape.showShapeSelector = true;
+      this.documentService.setActiveShapeSelectorShape(this.shape);
     });
 
     this.mouseDown
@@ -48,6 +48,7 @@ export class FlowDragAndDropDirective implements OnInit {
         return drag;
       })
       .subscribe((event : any) => {
+        this.documentService.clearShapeSelector();
         this.shape.moveTo(event.pageX, event.pageY);
       });    
   }

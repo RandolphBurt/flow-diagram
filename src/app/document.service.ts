@@ -10,7 +10,11 @@ export class DocumentService {
     this.shapes = [];
   }
 
-  private isPointWithinShape(shape: Shape, x: number, y: number, additionalBorder: number = 0) {
+  get activeShapeSelector(): Shape {
+    return this.activeShapeSelectorShape;
+  }
+
+  isPointWithinShape(shape: Shape, x: number, y: number, additionalBorder: number = 0) {
       if (Math.pow(x - shape.x, 2) + Math.pow(y - shape.y, 2) <= Math.pow(shape.radius + shape.strokeWidth + additionalBorder, 2)) {
         return true;
       }
@@ -64,11 +68,23 @@ export class DocumentService {
     return null;
   }
 
+  clearShapeSelector() {
+    if (this.activeShapeSelectorShape != null) {
+      this.activeShapeSelectorShape.showShapeSelector = false;
+    }
+    this.activeShapeSelectorShape = null;
+  }
+
   setActiveShapeSelectorShape(shape: Shape) {
+    if (this.activeShapeSelectorShape == shape) {
+      return;
+    }
+
     if (this.activeShapeSelectorShape != null) {
       this.activeShapeSelectorShape.showShapeSelector = false;
     }
     this.activeShapeSelectorShape = shape;
+    this.activeShapeSelectorShape.showShapeSelector = true;
     this.bringToFront(shape);
   }
 }

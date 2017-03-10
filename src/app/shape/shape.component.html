@@ -1,5 +1,6 @@
 <svg:circle *ngIf=shape.showShapeSelector appDeactivateShapeSelector [shape]="shape" 
-    [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius + 30" [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="1" [attr.fill-opacity]="0.0" />
+    [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius + shapeSelectorAdditionalDistance" 
+    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="1" [attr.fill-opacity]="0.0" />
 
 <svg:circle flowDragAndDrop appActivateShapeSelector [shape]="shape" 
     [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius" [attr.stroke]="shape.strokeColour" 
