@@ -8,11 +8,10 @@ import { FlowDragAndDropDirective } from './flow-drag-and-drop.directive';
 import { SelectBoxComponent } from './select-box/select-box.component';
 import { DocumentService } from './document.service';
 import { ShapeComponent } from './shape/shape.component';
-import { ActivateShapeSelectorDirective } from './activate-shape-selector.directive';
-import { DeactivateShapeSelectorDirective } from './deactivate-shape-selector.directive';
 import { ShapeSelectorComponent } from './shape-selector/shape-selector.component';
 import { ConstantsService } from "app/constants.service";
 import { ShapeSelectorListComponent } from './shape-selector-list/shape-selector-list.component';
+import { ToggleShapeSelectorDirective } from './toggle-shape-selector.directive';
 
 @NgModule({
   declarations: [
@@ -20,10 +19,9 @@ import { ShapeSelectorListComponent } from './shape-selector-list/shape-selector
     FlowDragAndDropDirective,
     SelectBoxComponent,
     ShapeComponent,
-    ActivateShapeSelectorDirective,
-    DeactivateShapeSelectorDirective,
     ShapeSelectorComponent,
-    ShapeSelectorListComponent
+    ShapeSelectorListComponent,
+    ToggleShapeSelectorDirective
   ],
   imports: [
     BrowserModule,

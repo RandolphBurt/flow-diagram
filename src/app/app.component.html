@@ -1,5 +1,5 @@
 <svg width="100%" height="800">
+  <g app-select-box></g>
   <g *ngFor="let shape of documentService.shapes" [app-shape]="shape"></g>
   <g *ngIf="documentService.activeShapeSelectorShape" [app-shape-selector]="documentService.activeShapeSelectorShape"></g>
-  <g app-select-box></g>
 </svg>

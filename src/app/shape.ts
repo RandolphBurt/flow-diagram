@@ -1,5 +1,9 @@
 export class Shape {
 
+    public inShape: boolean = false;
+    public inSurroundingBubble: boolean = false;
+    public inShapeSelector: boolean = false;
+
     public showShapeSelector: boolean = false;
 
     constructor(

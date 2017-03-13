@@ -9,11 +9,14 @@ export class DocumentService {
   constructor() {
     this.shapes = [];
   }
-
-  get activeShapeSelector(): Shape {
-    return this.activeShapeSelectorShape;
+  
+  private clearActiveShape() {
+    this.activeShapeSelectorShape.inShape = false;
+    this.activeShapeSelectorShape.inSurroundingBubble = false;
+    this.activeShapeSelectorShape.inShapeSelector = false;
+    this.activeShapeSelectorShape.showShapeSelector = false;
   }
-
+  
   isPointWithinShape(shape: Shape, x: number, y: number, additionalBorder: number = 0) {
       if (Math.pow(x - shape.x, 2) + Math.pow(y - shape.y, 2) <= Math.pow(shape.radius + shape.strokeWidth + additionalBorder, 2)) {
         return true;
@@ -70,21 +73,43 @@ export class DocumentService {
 
   clearShapeSelector() {
     if (this.activeShapeSelectorShape != null) {
-      this.activeShapeSelectorShape.showShapeSelector = false;
+      this.clearActiveShape();
     }
     this.activeShapeSelectorShape = null;
   }
 
-  setActiveShapeSelectorShape(shape: Shape) {
-    if (this.activeShapeSelectorShape == shape) {
-      return;
+  deactivateShapeSelector(shape: Shape, activationType: string) {
+    shape[activationType] = false;
+
+    setTimeout(() => {
+      // Delay slightly as we may move from the shapeSelectorBubble around the shape, into the shape - and the order of events
+      // means we leave one before entering the other - therefore the disabling action is delayed so we don't toggle the
+      // showShapeSelector setting needlessly (thus causing an animation of the shape selector disappearing and then appearing)
+      this.calculateIfShapeIsActive(shape);
+    }, 0);    
+  }
+
+  activateShapeSelector(shape: Shape, activationType: string) {
+    if (this.activeShapeSelectorShape != null && this.activeShapeSelectorShape != shape) {
+      this.clearActiveShape();
     }
 
-    if (this.activeShapeSelectorShape != null) {
-      this.activeShapeSelectorShape.showShapeSelector = false;
-    }
     this.activeShapeSelectorShape = shape;
-    this.activeShapeSelectorShape.showShapeSelector = true;
-    this.bringToFront(shape);
+    this.activeShapeSelectorShape[activationType] = true;
+    this.calculateIfShapeIsActive(this.activeShapeSelectorShape);
+  }
+
+  calculateIfShapeIsActive(shape: Shape) {
+    let previousShow = shape.showShapeSelector;
+
+    shape.showShapeSelector = shape.inShape || shape.inSurroundingBubble || shape.inShapeSelector;
+
+    if (shape.showShapeSelector == false && shape == this.activeShapeSelectorShape) {
+      this.activeShapeSelectorShape = null;
+    }
+
+    if (shape.showShapeSelector && !previousShow) {
+      this.bringToFront(shape);
+    }
   }
 }

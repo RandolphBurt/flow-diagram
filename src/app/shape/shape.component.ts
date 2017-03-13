@@ -10,6 +10,9 @@ import { ConstantsService } from "app/constants.service";
 export class ShapeComponent implements OnInit {
   @Input('app-shape') shape: Shape;
 
+  surroundingBubbleActivationType: string = 'inSurroundingBubble';
+  shapeActivationType: string = 'inShape';
+
   shapeSelectorAdditionalDistance: number = this.constantsService.shapeSelectorAdditionalDistance;
 
   constructor(private constantsService: ConstantsService) { }

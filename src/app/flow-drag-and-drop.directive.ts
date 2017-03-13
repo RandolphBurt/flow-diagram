@@ -39,7 +39,7 @@ export class FlowDragAndDropDirective implements OnInit {
 
   ngOnInit() {
     var finished = this.mouseUp.map((event: any) => {
-      this.documentService.setActiveShapeSelectorShape(this.shape);
+      this.documentService.activateShapeSelector(this.shape, 'inShape');
     });
 
     this.mouseDown

@@ -9,6 +9,8 @@ import { Shape } from "app/shape";
 export class ShapeSelectorComponent implements OnInit, OnChanges {
   @Input('app-shape-selector') shape: Shape;
 
+  shapeSelectorActivationType: string = "inShapeSelector";
+
   points: string;
   topSelectorTransform: string;
   rightSelectorTransform: string;
