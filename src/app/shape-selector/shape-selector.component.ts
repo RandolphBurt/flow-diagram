@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Shape } from "app/shape";
+import { Shape, ShapeSelectorStatusFlags } from "app/shape";
 
 @Component({
   selector: '[app-shape-selector]',
@@ -9,7 +9,7 @@ import { Shape } from "app/shape";
 export class ShapeSelectorComponent implements OnInit, OnChanges {
   @Input('app-shape-selector') shape: Shape;
 
-  shapeSelectorActivationType: string = "inShapeSelector";
+  shapeSelectorActivationType: ShapeSelectorStatusFlags = ShapeSelectorStatusFlags.InShapeSelector;
 
   points: string;
   topSelectorTransform: string;

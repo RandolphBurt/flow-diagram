@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Shape } from './shape'
+import { Shape, ShapeSelectorStatusFlags } from './shape'
 
 @Injectable()
 export class DocumentService {
@@ -12,9 +12,7 @@ export class DocumentService {
   
   private clearActiveShape() {
     this.activeShapeSelectorShape.inShape = false;
-    this.activeShapeSelectorShape.inSurroundingBubble = false;
-    this.activeShapeSelectorShape.inShapeSelector = false;
-    this.activeShapeSelectorShape.showShapeSelector = false;
+    this.activeShapeSelectorShape.shapeSelectorStatus = ShapeSelectorStatusFlags.None;
   }
   
   isPointWithinShape(shape: Shape, x: number, y: number, additionalBorder: number = 0) {
@@ -78,8 +76,8 @@ export class DocumentService {
     this.activeShapeSelectorShape = null;
   }
 
-  deactivateShapeSelector(shape: Shape, activationType: string) {
-    shape[activationType] = false;
+  deactivateShapeSelector(shape: Shape, activationType: ShapeSelectorStatusFlags) {
+    shape.shapeSelectorStatus &= ~activationType;
 
     setTimeout(() => {
       // Delay slightly as we may move from the shapeSelectorBubble around the shape, into the shape - and the order of events
@@ -89,20 +87,20 @@ export class DocumentService {
     }, 0);    
   }
 
-  activateShapeSelector(shape: Shape, activationType: string) {
+  activateShapeSelector(shape: Shape, activationType: ShapeSelectorStatusFlags) {
     if (this.activeShapeSelectorShape != null && this.activeShapeSelectorShape != shape) {
       this.clearActiveShape();
     }
 
     this.activeShapeSelectorShape = shape;
-    this.activeShapeSelectorShape[activationType] = true;
+    this.activeShapeSelectorShape.shapeSelectorStatus |= activationType;
     this.calculateIfShapeIsActive(this.activeShapeSelectorShape);
   }
 
   calculateIfShapeIsActive(shape: Shape) {
     let previousShow = shape.showShapeSelector;
 
-    shape.showShapeSelector = shape.inShape || shape.inSurroundingBubble || shape.inShapeSelector;
+    shape.showShapeSelector = shape.shapeSelectorStatus != ShapeSelectorStatusFlags.None;
 
     if (shape.showShapeSelector == false && shape == this.activeShapeSelectorShape) {
       this.activeShapeSelectorShape = null;

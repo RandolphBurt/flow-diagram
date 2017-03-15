@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Shape } from '../shape'
+import { Shape, ShapeSelectorStatusFlags } from '../shape'
 import { ConstantsService } from "app/constants.service";
 
 @Component({
@@ -10,8 +10,8 @@ import { ConstantsService } from "app/constants.service";
 export class ShapeComponent implements OnInit {
   @Input('app-shape') shape: Shape;
 
-  surroundingBubbleActivationType: string = 'inSurroundingBubble';
-  shapeActivationType: string = 'inShape';
+  surroundingBubbleActivationType: ShapeSelectorStatusFlags = ShapeSelectorStatusFlags.InSurroundingBubble;
+  shapeActivationType: ShapeSelectorStatusFlags = ShapeSelectorStatusFlags.InShape;
 
   shapeSelectorAdditionalDistance: number = this.constantsService.shapeSelectorAdditionalDistance;
 

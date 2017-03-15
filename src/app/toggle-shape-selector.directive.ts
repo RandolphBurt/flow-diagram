@@ -1,5 +1,5 @@
 import { Directive, HostListener, Input, EventEmitter, OnInit } from '@angular/core';
-import { Shape } from "app/shape";
+import { Shape, ShapeSelectorStatusFlags } from "app/shape";
 
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/do';
@@ -14,7 +14,7 @@ export class ToggleShapeSelectorDirective {
   mouseLeave: EventEmitter<MouseEvent>;
 
   @Input() shape: Shape;
-  @Input() activationType: string;
+  @Input() activationType: ShapeSelectorStatusFlags;
 
   @HostListener('mouseover', ['$event']) onMouseOver(event: MouseEvent) {
     this.mouseEnter.emit(event);

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 
-import { Shape } from './shape';
+import { Shape, ShapeSelectorStatusFlags } from './shape';
 import { DocumentService } from "app/document.service";
 
 @Directive({
@@ -39,7 +39,7 @@ export class FlowDragAndDropDirective implements OnInit {
 
   ngOnInit() {
     var finished = this.mouseUp.map((event: any) => {
-      this.documentService.activateShapeSelector(this.shape, 'inShape');
+      this.documentService.activateShapeSelector(this.shape, ShapeSelectorStatusFlags.InShape);
     });
 
     this.mouseDown
