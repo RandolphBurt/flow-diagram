@@ -11,6 +11,7 @@ export class DocumentService {
   }
   
   private clearActiveShape() {
+    this.activeShapeSelectorShape.showShapeSelector = false;
     this.activeShapeSelectorShape.inShape = false;
     this.activeShapeSelectorShape.shapeSelectorStatus = ShapeSelectorStatusFlags.None;
   }

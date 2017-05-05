@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Shape, ShapeSelectorStatusFlags } from '../shape'
 import { ConstantsService } from "app/constants.service";
+import { DocumentService } from "app/document.service";
 
 @Component({
   selector: '[app-shape]',
@@ -15,9 +16,13 @@ export class ShapeComponent implements OnInit {
 
   shapeSelectorAdditionalDistance: number = this.constantsService.shapeSelectorAdditionalDistance;
 
-  constructor(private constantsService: ConstantsService) { }
+  constructor(private constantsService: ConstantsService, private documentService: DocumentService) { }
 
   ngOnInit() {
+  }
+
+  userClick() {
+    this.documentService.clearShapeSelector();
   }
 
 }

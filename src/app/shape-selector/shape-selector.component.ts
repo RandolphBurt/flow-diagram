@@ -31,9 +31,9 @@ export class ShapeSelectorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.points = `
-      ${this.shape.x - 10},${this.shape.y + 10} 
-      ${this.shape.x + 10},${this.shape.y + 10}
-      ${this.shape.x},${this.shape.y - 8}`;
+      ${this.shape.x - 5},${this.shape.y + 5} 
+      ${this.shape.x + 5},${this.shape.y + 5}
+      ${this.shape.x},${this.shape.y - 4}`;
     
     var offset = this.shape.radius + this.shape.strokeWidth + 7;
     this.topSelectorTransform = `translate(0, ${-1 * offset})`
@@ -46,7 +46,7 @@ export class ShapeSelectorComponent implements OnInit, OnChanges {
   activateShapeSelectionList(position: ShapeSelectionListPosition): void {
     this.selectionListPosition = position;
 
-    var offset = this.shape.radius + this.shape.strokeWidth + 25;
+    var offset = this.shape.radius + this.shape.strokeWidth + 30;
 
     switch (position) {
       case ShapeSelectionListPosition.Top:
