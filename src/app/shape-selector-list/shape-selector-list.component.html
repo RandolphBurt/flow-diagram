@@ -1,3 +1,24 @@
-<p>
-  shape-selector-list works!
-</p>
+<svg:rect [attr.x]="shapeListX" [attr.y]="shapeListY" [attr.width]="width" [attr.height]="height" stroke="black" fill="white"
+  appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShapeSelectorList"/> 
+
+<!-- Rectangle shape -->
+<svg:rect [attr.x]="rectX" [attr.y]="rectY" [attr.width]="rectWidth" [attr.height]="rectHeight" stroke="black" fill="white"
+  appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShapeSelectorList"/> 
+
+<!-- Diamond shape-->
+<svg:polygon [attr.points]="diamondPoints" stroke="black" fill="white"
+    appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShapeSelectorList" />
+
+<!-- Double end Rectangle shape -->
+<svg:rect [attr.x]="doubleEndRectX" [attr.y]="doubleEndRectY" [attr.width]="doubleEndRectWidth" [attr.height]="doubleEndRectHeight" 
+          stroke="black" fill="white"
+  appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShapeSelectorList"/> 
+
+<svg:rect [attr.x]="doubleEndRectInnerX" [attr.y]="doubleEndRectY" [attr.width]="doubleEndRectInnerWidth" [attr.height]="doubleEndRectHeight" 
+          stroke="black" fill="white"
+  appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShapeSelectorList"/> 
+
+<!-- Rectangle with rounded corners -->
+<svg:rect [attr.x]="roundedRectX" [attr.y]="roundedRectY" [attr.width]="roundedRectWidth" [attr.height]="roundedRectHeight" 
+          [attr.rx]="roundedRectRadiusX" [attr.ry]="roundedRectRadiusY" stroke="black" fill="white"
+  appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShapeSelectorList"/> 

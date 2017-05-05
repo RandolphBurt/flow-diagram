@@ -2,15 +2,16 @@ export enum ShapeSelectorStatusFlags {
     None = 0,
     InShape = 1 << 0,
     InSurroundingBubble = 1 << 1,
-    InShapeSelector = 1 << 2
+    InShapeSelector = 1 << 2,
+    InShapeSelectorList = 1 << 3
 }
 export class Shape {
 
     public shapeSelectorStatus: ShapeSelectorStatusFlags = ShapeSelectorStatusFlags.None;
 
     public inShape: boolean = false;
-    public inSurroundingBubble: boolean = false;
-    public inShapeSelector: boolean = false;
+//    public inSurroundingBubble: boolean = false;
+//    public inShapeSelector: boolean = false;
 
     public showShapeSelector: boolean = false;
 

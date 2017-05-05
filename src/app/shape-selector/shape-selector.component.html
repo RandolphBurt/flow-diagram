@@ -1,13 +1,20 @@
 <svg:g class="fade-in">
   <svg:polygon [attr.points]="points" [attr.transform]="topSelectorTransform" style="fill:lime;stroke:purple;stroke-width:1"
-      appToggleShapeSelectorStatus [shape]="shape" [activationType]="shapeSelectorActivationType"/>
+      appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShapeSelector"
+      (mouseOver)="activateShapeSelectionList(ShapeSelectionListPosition.Top)" />
   
   <svg:polygon [attr.points]="points" [attr.transform]="rightSelectorTransform" style="fill:lime;stroke:purple;stroke-width:1"
-      appToggleShapeSelectorStatus [shape]="shape" [activationType]="shapeSelectorActivationType"/>
+      appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShapeSelector"
+      (mouseOver)="activateShapeSelectionList(ShapeSelectionListPosition.Right)" />
   
   <svg:polygon [attr.points]="points" [attr.transform]="bottomSelectorTransform" style="fill:lime;stroke:purple;stroke-width:1"
-      appToggleShapeSelectorStatus [shape]="shape" [activationType]="shapeSelectorActivationType"/>
+      appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShapeSelector"
+      (mouseOver)="activateShapeSelectionList(ShapeSelectionListPosition.Bottom)" />
   
   <svg:polygon [attr.points]="points" [attr.transform]="leftSelectorTransform" style="fill:lime;stroke:purple;stroke-width:1"
-      appToggleShapeSelectorStatus [shape]="shape" [activationType]="shapeSelectorActivationType"/>
+      appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShapeSelector" 
+      (mouseOver)="activateShapeSelectionList(ShapeSelectionListPosition.Left)" />  
 </svg:g>
+
+<svg:g *ngIf="selectionListPosition!==ShapeSelectionListPosition.None" 
+    [app-shape-selector-list]="shape" [position]="selectionListPosition" [centreX]="selectionListCentreX" [centreY]="selectionListCentreY"></svg:g>

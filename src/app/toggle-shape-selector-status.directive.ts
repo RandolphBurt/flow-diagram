@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input, EventEmitter, OnInit } from '@angular/core';
+import { Directive, HostListener, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Shape, ShapeSelectorStatusFlags } from "app/shape";
 
 import { Observable } from 'rxjs/Rx';
@@ -15,6 +15,7 @@ export class ToggleShapeSelectorStatusDirective {
 
   @Input() shape: Shape;
   @Input() activationType: ShapeSelectorStatusFlags;
+  @Output() mouseOver: EventEmitter<any> = new EventEmitter<any>();
 
   @HostListener('mouseover', ['$event']) onMouseOver(event: MouseEvent) {
     this.mouseEnter.emit(event);
@@ -34,6 +35,10 @@ export class ToggleShapeSelectorStatusDirective {
       // not pressing a button
       if (event.buttons === 0) {
         this.documentService.activateShapeSelectorStatus(this.shape, this.activationType);
+        
+        if (this.mouseOver) {
+          this.mouseOver.emit();
+        }
       }
     });
 

@@ -1,7 +1,7 @@
-<svg:circle *ngIf=shape.showShapeSelector appToggleShapeSelectorStatus [shape]="shape" [activationType]="surroundingBubbleActivationType"
+<svg:circle *ngIf=shape.showShapeSelector appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InSurroundingBubble"
     [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius + shapeSelectorAdditionalDistance" 
     [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="1" [attr.fill-opacity]="0.0" />
 
-<svg:circle flowDragAndDrop appToggleShapeSelectorStatus [shape]="shape" [activationType]="shapeActivationType"
+<svg:circle flowDragAndDrop appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShape"
     [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius" [attr.stroke]="shape.strokeColour" 
     [attr.stroke-width]="shape.strokeWidth" [attr.fill]="shape.fillColour" />

@@ -10,8 +10,8 @@ import { ConstantsService } from "app/constants.service";
 export class ShapeComponent implements OnInit {
   @Input('app-shape') shape: Shape;
 
-  surroundingBubbleActivationType: ShapeSelectorStatusFlags = ShapeSelectorStatusFlags.InSurroundingBubble;
-  shapeActivationType: ShapeSelectorStatusFlags = ShapeSelectorStatusFlags.InShape;
+  // Do this to expose the enum to our template
+  public ShapeSelectorStatusFlags = ShapeSelectorStatusFlags;
 
   shapeSelectorAdditionalDistance: number = this.constantsService.shapeSelectorAdditionalDistance;
 
