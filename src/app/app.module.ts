@@ -11,7 +11,7 @@ import { ShapeComponent } from './shape/shape.component';
 import { ShapeSelectorComponent } from './shape-selector/shape-selector.component';
 import { ConstantsService } from "app/constants.service";
 import { ShapeSelectorListComponent } from './shape-selector-list/shape-selector-list.component';
-import { ToggleShapeSelectorDirective } from './toggle-shape-selector.directive';
+import { ToggleShapeSelectorStatusDirective } from './toggle-shape-selector-status.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { ToggleShapeSelectorDirective } from './toggle-shape-selector.directive'
     ShapeComponent,
     ShapeSelectorComponent,
     ShapeSelectorListComponent,
-    ToggleShapeSelectorDirective
+    ToggleShapeSelectorStatusDirective
   ],
   imports: [
     BrowserModule,

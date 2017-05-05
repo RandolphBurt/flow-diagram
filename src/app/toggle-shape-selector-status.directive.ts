@@ -7,9 +7,9 @@ import 'rxjs/add/operator/map';
 import { DocumentService } from "app/document.service";
 
 @Directive({
-  selector: '[appToggleShapeSelector]'
+  selector: '[appToggleShapeSelectorStatus]'
 })
-export class ToggleShapeSelectorDirective {
+export class ToggleShapeSelectorStatusDirective {
   mouseEnter: EventEmitter<MouseEvent>;
   mouseLeave: EventEmitter<MouseEvent>;
 
@@ -33,12 +33,12 @@ export class ToggleShapeSelectorDirective {
     this.mouseEnter.subscribe((event : any) => {
       // not pressing a button
       if (event.buttons === 0) {
-        this.documentService.activateShapeSelector(this.shape, this.activationType);
+        this.documentService.activateShapeSelectorStatus(this.shape, this.activationType);
       }
     });
 
     this.mouseLeave.subscribe((event: any) => {
-      this.documentService.deactivateShapeSelector(this.shape, this.activationType);
+      this.documentService.deactivateShapeSelectorStatus(this.shape, this.activationType);
     });
   }
 }

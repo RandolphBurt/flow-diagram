@@ -76,7 +76,7 @@ export class DocumentService {
     this.activeShapeSelectorShape = null;
   }
 
-  deactivateShapeSelector(shape: Shape, activationType: ShapeSelectorStatusFlags) {
+  deactivateShapeSelectorStatus(shape: Shape, activationType: ShapeSelectorStatusFlags) {
     shape.shapeSelectorStatus &= ~activationType;
 
     setTimeout(() => {
@@ -87,7 +87,7 @@ export class DocumentService {
     }, 0);    
   }
 
-  activateShapeSelector(shape: Shape, activationType: ShapeSelectorStatusFlags) {
+  activateShapeSelectorStatus(shape: Shape, activationType: ShapeSelectorStatusFlags) {
     if (this.activeShapeSelectorShape != null && this.activeShapeSelectorShape != shape) {
       this.clearActiveShape();
     }
