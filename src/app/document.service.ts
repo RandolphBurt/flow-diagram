@@ -17,13 +17,6 @@ export class DocumentService {
     this.activeShapeSelectorShape = null;
   }
   
-  isPointWithinShape(shape: Shape, x: number, y: number, additionalBorder: number = 0) {
-      if (Math.pow(x - shape.x, 2) + Math.pow(y - shape.y, 2) <= Math.pow(shape.radius + shape.strokeWidth + additionalBorder, 2)) {
-        return true;
-      }
-      return false;
-  }
-
   addShape(shape: Shape) {
     this.shapes.push(shape);
   }
@@ -64,7 +57,7 @@ export class DocumentService {
   findShape(x: number, y: number, additionalBorder: number = 0) : Shape {
     for (let i = this.shapes.length - 1; i >= 0; i--) {
       let shape = this.shapes[i];
-      if (this.isPointWithinShape(shape, x, y, additionalBorder)) {
+      if (shape.isPointWithinShape(x, y, additionalBorder)) {
         return shape;
       }
     }    

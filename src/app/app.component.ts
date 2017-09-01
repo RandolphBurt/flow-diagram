@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 
-import { Shape } from './shape';
+import { Circle } from './shape';
 import { DocumentService } from './document.service';
 
 @Component({
@@ -15,8 +15,8 @@ import { DocumentService } from './document.service';
 export class AppComponent {
 
   constructor(private documentService: DocumentService) {
-    this.documentService.addShape(new Shape(50, 50, 40, 4, "green", "yellow"));
-    this.documentService.addShape(new Shape(150, 150, 20, 2, "blue", "red"));
-    this.documentService.addShape(new Shape(200, 200, 40, 4, "red", "orange"));
+    this.documentService.addShape(new Circle(50, 50, 40, "green", "yellow"));
+    this.documentService.addShape(new Circle(150, 150, 20, "blue", "red"));
+    this.documentService.addShape(new Circle(200, 200, 40, "red", "orange"));
   }
 }

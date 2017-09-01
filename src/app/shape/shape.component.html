@@ -8,9 +8,9 @@
 <svg:circle *ngIf="!isPotentialShape" flowDragAndDrop 
     appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShape"
     [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius" [attr.stroke]="shape.strokeColour" 
-    [attr.stroke-width]="shape.strokeWidth" [attr.fill]="shape.fillColour" />
+    [attr.stroke-width]="Shape.strokeWidth" [attr.fill]="shape.fillColour" />
 
 <!-- If a potential shape then show slightly differently -->
 <svg:circle *ngIf="isPotentialShape" 
     [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius" [attr.stroke]="'grey'" 
-    [attr.stroke-width]="shape.strokeWidth" [attr.fill]="'lightgrey'"/>
+    [attr.stroke-width]="Shape.strokeWidth" [attr.fill]="'lightgrey'"/>

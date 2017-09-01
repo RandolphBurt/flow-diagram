@@ -35,7 +35,7 @@ export class ShapeSelectorComponent implements OnInit, OnChanges {
       ${this.shape.x + 5},${this.shape.y + 5}
       ${this.shape.x},${this.shape.y - 4}`;
     
-    var offset = this.shape.radius + this.shape.strokeWidth + 7;
+    var offset = this.shape.radius + Shape.strokeWidth + 7;
     this.topSelectorTransform = `translate(0, ${-1 * offset})`
     this.rightSelectorTransform = `translate(${offset}, 0) rotate(90, ${this.shape.x}, ${this.shape.y})`
     this.bottomSelectorTransform = `translate(0, ${offset}) rotate(180, ${this.shape.x}, ${this.shape.y})`
@@ -46,7 +46,7 @@ export class ShapeSelectorComponent implements OnInit, OnChanges {
   activateShapeSelectionList(position: ShapeSelectionListPosition): void {
     this.selectionListPosition = position;
 
-    var offset = this.shape.radius + this.shape.strokeWidth + 30;
+    var offset = this.shape.radius + Shape.strokeWidth + 30;
 
     switch (position) {
       case ShapeSelectionListPosition.Top:
