@@ -15,6 +15,7 @@ export class DocumentService {
     this.activeShapeSelectorShape.showShapeSelector = false;
     this.activeShapeSelectorShape.shapeSelectorStatus = ShapeSelectorStatusFlags.None;
     this.activeShapeSelectorShape = null;
+    this.potentialNewShape = null;
   }
   
   addShape(shape: Shape) {
@@ -98,6 +99,7 @@ export class DocumentService {
 
     if (shape.showShapeSelector == false && shape == this.activeShapeSelectorShape) {
       this.activeShapeSelectorShape = null;
+      this.potentialNewShape = null;      
     }
 
     if (shape.showShapeSelector && !previousShow) {
