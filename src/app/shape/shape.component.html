@@ -38,3 +38,27 @@
     [attr.x]="shape.topLeftX" [attr.y]="shape.topLeftY" [attr.width]="shape.width" [attr.height]="shape.height"
     [attr.stroke]="potentialShapeStrokeColour" [attr.stroke-width]="Shape.strokeWidth" [attr.fill]="potentialShapeFillColour"/>
 
+<!-- ROUNDED RECTANGLE -->
+<!-- Surrounding area of shape for detecting mouse movement to trigger offering new connected shapes -->
+<svg:rect *ngIf="shape.constructor.name == 'RoundedRectangle' && shape.showShapeSelector"
+    appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InSurroundingBubble"
+    [attr.x]="shape.topLeftX - shapeSelectorAdditionalDistance" [attr.y]="shape.topLeftY - shapeSelectorAdditionalDistance" 
+    [attr.rx]="shape.roundLengthX" [attr.ry]="shape.roundLengthY"
+    [attr.width]="shape.width + (2 * shapeSelectorAdditionalDistance)" 
+    [attr.height]="shape.height + (2 * shapeSelectorAdditionalDistance)" 
+    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="0" [attr.fill-opacity]="0.0" 
+    (click)="userClick()"/> <!-- Set stroke-width to 1 if debugging mouse in shape selector circle -->
+
+<svg:rect *ngIf="shape.constructor.name == 'RoundedRectangle' && !isPotentialShape" 
+    flowDragAndDrop 
+    appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShape"
+    [attr.x]="shape.topLeftX" [attr.y]="shape.topLeftY" [attr.width]="shape.width" [attr.height]="shape.height"
+    [attr.rx]="shape.roundLengthX" [attr.ry]="shape.roundLengthY"
+    [attr.stroke]="shape.strokeColour" [attr.stroke-width]="Shape.strokeWidth" [attr.fill]="shape.fillColour" />
+
+<!-- If a potential shape then show slightly differently -->
+<svg:rect *ngIf="shape.constructor.name == 'RoundedRectangle' && isPotentialShape" 
+    [attr.x]="shape.topLeftX" [attr.y]="shape.topLeftY" [attr.width]="shape.width" [attr.height]="shape.height"
+    [attr.rx]="shape.roundLengthX" [attr.ry]="shape.roundLengthY"
+    [attr.stroke]="potentialShapeStrokeColour" [attr.stroke-width]="Shape.strokeWidth" [attr.fill]="potentialShapeFillColour"/>
+

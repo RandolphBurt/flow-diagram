@@ -79,3 +79,35 @@ export class Rectangle extends Shape {
         return false;
     } 
 }
+
+export class RoundedRectangle extends Shape {
+    static defaultWidth: number = 60;
+    static defaultHeight: number = 40;
+
+    private topLeftX: number;
+    private topLeftY: number;
+    private roundLengthX: number;
+    private roundLengthY: number;
+
+    constructor(centreX: number, centreY: number) {
+        super(centreX, centreY, Rectangle.defaultWidth, Rectangle.defaultHeight, "powderblue", "grey");
+        this.topLeftX = this.centreX - (this.width / 2);
+        this.topLeftY = this.centreY - (this.height / 2);
+        this.roundLengthX = this.width / 4;
+        this.roundLengthY = this.height / 2;
+    }
+
+    moveTo(centreX: number, centreY: number) {
+        super.moveTo(centreX, centreY);
+        this.topLeftX = this.centreX - (this.width / 2);
+        this.topLeftY = this.centreY - (this.height / 2);
+    }
+
+    isPointWithinShape(x: number, y: number, additionalBorder: number = 0) {
+        if (x >= this.topLeftX && x <= this.topLeftX + this.width && 
+            y >= this.topLeftY && y <= this.topLeftY + this.height) {
+          return true;
+        }
+        return false;
+    } 
+}
