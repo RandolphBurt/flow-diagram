@@ -19,6 +19,8 @@ export class ShapeComponent implements OnInit {
   public ShapeSelectorStatusFlags = ShapeSelectorStatusFlags;
 
   shapeSelectorAdditionalDistance: number = this.constantsService.shapeSelectorAdditionalDistance;
+  potentialShapeFillColour: string = this.constantsService.potentialShapeFillColour;
+  potentialShapeStrokeColour: string = this.constantsService.potentialShapeStrokeColour;
 
   constructor(private constantsService: ConstantsService, private documentService: DocumentService) { }
 
@@ -28,5 +30,4 @@ export class ShapeComponent implements OnInit {
   userClick() {
     this.documentService.clearShapeSelector();
   }
-
 }

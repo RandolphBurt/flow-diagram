@@ -31,39 +31,40 @@ export class ShapeSelectorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.points = `
-      ${this.shape.x - 5},${this.shape.y + 5} 
-      ${this.shape.x + 5},${this.shape.y + 5}
-      ${this.shape.x},${this.shape.y - 4}`;
+      ${this.shape.centreX - 5},${this.shape.centreY + 5} 
+      ${this.shape.centreX + 5},${this.shape.centreY + 5}
+      ${this.shape.centreX},${this.shape.centreY - 4}`;
     
-    var offset = this.shape.radius + Shape.strokeWidth + 7;
-    this.topSelectorTransform = `translate(0, ${-1 * offset})`
-    this.rightSelectorTransform = `translate(${offset}, 0) rotate(90, ${this.shape.x}, ${this.shape.y})`
-    this.bottomSelectorTransform = `translate(0, ${offset}) rotate(180, ${this.shape.x}, ${this.shape.y})`
-    this.leftSelectorTransform = `translate(${-1 * offset}, 0) rotate(270, ${this.shape.x}, ${this.shape.y})`
+    var widthOffset = (this.shape.width / 2) + Shape.strokeWidth + 7;
+    var heightOffset = (this.shape.height / 2) + Shape.strokeWidth + 7;
+    this.topSelectorTransform = `translate(0, ${-1 * heightOffset})`
+    this.rightSelectorTransform = `translate(${widthOffset}, 0) rotate(90, ${this.shape.centreX}, ${this.shape.centreY})`
+    this.bottomSelectorTransform = `translate(0, ${heightOffset}) rotate(180, ${this.shape.centreX}, ${this.shape.centreY})`
+    this.leftSelectorTransform = `translate(${-1 * widthOffset}, 0) rotate(270, ${this.shape.centreX}, ${this.shape.centreY})`
     this.selectionListPosition = ShapeSelectionListPosition.None;
   }
 
   activateShapeSelectionList(position: ShapeSelectionListPosition): void {
     this.selectionListPosition = position;
 
-    var offset = this.shape.radius + Shape.strokeWidth + 30;
+    var offset = (this.shape.width / 2) + Shape.strokeWidth + 30;
 
     switch (position) {
       case ShapeSelectionListPosition.Top:
-        this.selectionListCentreX = this.shape.x;
-        this.selectionListCentreY = this.shape.y - offset;
+        this.selectionListCentreX = this.shape.centreX;
+        this.selectionListCentreY = this.shape.centreY - offset;
         break;
       case ShapeSelectionListPosition.Bottom:
-        this.selectionListCentreX = this.shape.x;
-        this.selectionListCentreY = this.shape.y + offset;
+        this.selectionListCentreX = this.shape.centreX;
+        this.selectionListCentreY = this.shape.centreY + offset;
         break;
       case ShapeSelectionListPosition.Left:
-        this.selectionListCentreX = this.shape.x - offset;
-        this.selectionListCentreY = this.shape.y;
+        this.selectionListCentreX = this.shape.centreX - offset;
+        this.selectionListCentreY = this.shape.centreY;
         break;
       case ShapeSelectionListPosition.Right:
-        this.selectionListCentreX = this.shape.x + offset;
-        this.selectionListCentreY = this.shape.y;
+        this.selectionListCentreX = this.shape.centreX + offset;
+        this.selectionListCentreY = this.shape.centreY;
         break;
     }
   }

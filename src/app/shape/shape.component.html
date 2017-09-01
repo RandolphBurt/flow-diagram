@@ -1,16 +1,40 @@
+<!-- CIRCLE -->
 <!-- Surrounding area of shape for detecting mouse movement to trigger offering new connected shapes -->
-<svg:circle *ngIf=shape.showShapeSelector 
+<svg:circle *ngIf="shape.constructor.name == 'Circle' && shape.showShapeSelector"
     appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InSurroundingBubble"
-    [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius + shapeSelectorAdditionalDistance" 
+    [attr.cx]="shape.centreX" [attr.cy]="shape.centreY" [attr.r]="shape.radius + shapeSelectorAdditionalDistance" 
     [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="0" [attr.fill-opacity]="0.0" 
     (click)="userClick()"/> <!-- Set stroke-width to 1 if debugging mouse in shape selector circle -->
-
-<svg:circle *ngIf="!isPotentialShape" flowDragAndDrop 
+    
+<svg:circle *ngIf="shape.constructor.name == 'Circle' && !isPotentialShape" 
+    flowDragAndDrop 
     appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShape"
-    [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius" [attr.stroke]="shape.strokeColour" 
+    [attr.cx]="shape.centreX" [attr.cy]="shape.centreY" [attr.r]="shape.radius" [attr.stroke]="shape.strokeColour" 
     [attr.stroke-width]="Shape.strokeWidth" [attr.fill]="shape.fillColour" />
 
 <!-- If a potential shape then show slightly differently -->
-<svg:circle *ngIf="isPotentialShape" 
-    [attr.cx]="shape.x" [attr.cy]="shape.y" [attr.r]="shape.radius" [attr.stroke]="'grey'" 
-    [attr.stroke-width]="Shape.strokeWidth" [attr.fill]="'lightgrey'"/>
+<svg:circle *ngIf="shape.constructor.name == 'Circle' && isPotentialShape" 
+    [attr.cx]="shape.centreX" [attr.cy]="shape.centreY" [attr.r]="shape.radius" 
+    [attr.stroke]="potentialShapeStrokeColour" [attr.stroke-width]="Shape.strokeWidth" [attr.fill]="potentialShapeFillColour"/>
+
+<!-- RECTANGLE -->
+<!-- Surrounding area of shape for detecting mouse movement to trigger offering new connected shapes -->
+<svg:rect *ngIf="shape.constructor.name == 'Rectangle' && shape.showShapeSelector"
+    appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InSurroundingBubble"
+    [attr.x]="shape.topLeftX - shapeSelectorAdditionalDistance" [attr.y]="shape.topLeftY - shapeSelectorAdditionalDistance" 
+    [attr.width]="shape.width + (2 * shapeSelectorAdditionalDistance)" 
+    [attr.height]="shape.height + (2 * shapeSelectorAdditionalDistance)" 
+    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="0" [attr.fill-opacity]="0.0" 
+    (click)="userClick()"/> <!-- Set stroke-width to 1 if debugging mouse in shape selector circle -->
+    
+<svg:rect *ngIf="shape.constructor.name == 'Rectangle' && !isPotentialShape" 
+    flowDragAndDrop 
+    appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InShape"
+    [attr.x]="shape.topLeftX" [attr.y]="shape.topLeftY" [attr.width]="shape.width" [attr.height]="shape.height"
+    [attr.stroke]="shape.strokeColour" [attr.stroke-width]="Shape.strokeWidth" [attr.fill]="shape.fillColour" />
+
+<!-- If a potential shape then show slightly differently -->
+<svg:rect *ngIf="shape.constructor.name == 'Rectangle' && isPotentialShape" 
+    [attr.x]="shape.topLeftX" [attr.y]="shape.topLeftY" [attr.width]="shape.width" [attr.height]="shape.height"
+    [attr.stroke]="potentialShapeStrokeColour" [attr.stroke-width]="Shape.strokeWidth" [attr.fill]="potentialShapeFillColour"/>
+

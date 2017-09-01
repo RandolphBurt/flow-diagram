@@ -5,6 +5,7 @@ export enum ShapeSelectorStatusFlags {
     InShapeSelector = 1 << 2,
     InShapeSelectorList = 1 << 3
 }
+
 export abstract class Shape {
 
     shapeSelectorStatus: ShapeSelectorStatusFlags = ShapeSelectorStatusFlags.None;
@@ -17,32 +18,62 @@ export abstract class Shape {
     static strokeWidth: number = 2;
 
     constructor(
-        public x: number, 
-        public y: number, 
-        public radius: number,
+        public centreX: number, 
+        public centreY: number, 
+        public width: number,
+        public height: number,
         public fillColour: string,
         public strokeColour: string) {
     }
 
     abstract isPointWithinShape(x: number, y: number, additionalBorder: number);
         
-    moveTo(x: number, y: number) {
-        this.x = x;
-        this.y = y;
+    moveTo(centreX: number, centreY: number) {
+        this.centreX = centreX;
+        this.centreY = centreY;
     }
 }
+
 export class Circle extends Shape {
-    constructor(
-        x: number, 
-        y: number, 
-        radius: number,
-        fillColour: string,
-        strokeColour: string) {
-            super(x, y, radius, fillColour, strokeColour);
+    static defaultDiameter: number = 40;
+  
+    private radius: number;
+
+    constructor(centreX: number, centreY: number) {
+        super(centreX, centreY, Circle.defaultDiameter, Circle.defaultDiameter, "powderblue", "grey");
+        this.radius = this.width / 2;
     }
 
     isPointWithinShape(x: number, y: number, additionalBorder: number = 0) {
-        if (Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2) <= Math.pow(this.radius + Shape.strokeWidth + additionalBorder, 2)) {
+        if (Math.pow(x - this.centreX, 2) + Math.pow(y - this.centreY, 2) <= Math.pow(this.radius + Shape.strokeWidth + additionalBorder, 2)) {
+          return true;
+        }
+        return false;
+    } 
+}
+
+export class Rectangle extends Shape {
+    static defaultWidth: number = 60;
+    static defaultHeight: number = 40;
+
+    private topLeftX: number;
+    private topLeftY: number;
+
+    constructor(centreX: number, centreY: number) {
+        super(centreX, centreY, Rectangle.defaultWidth, Rectangle.defaultHeight, "powderblue", "grey");
+        this.topLeftX = this.centreX - (this.width / 2);
+        this.topLeftY = this.centreY - (this.height / 2);
+    }
+
+    moveTo(centreX: number, centreY: number) {
+        super.moveTo(centreX, centreY);
+        this.topLeftX = this.centreX - (this.width / 2);
+        this.topLeftY = this.centreY - (this.height / 2);
+    }
+
+    isPointWithinShape(x: number, y: number, additionalBorder: number = 0) {
+        if (x >= this.topLeftX && x <= this.topLeftX + this.width && 
+            y >= this.topLeftY && y <= this.topLeftY + this.height) {
           return true;
         }
         return false;

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges  } from '@angular/core';
-import { Shape, ShapeSelectorStatusFlags, Circle } from "app/shape";
+import { Shape, ShapeSelectorStatusFlags, Circle, Rectangle } from "app/shape";
 import { ShapeSelectionListPosition } from "app/shape-selection-list-position.enum";
 import { DocumentService } from "app/document.service";
 
@@ -14,8 +14,6 @@ export class ShapeSelectorListComponent implements OnInit, OnChanges {
   @Input() centreX: number;
   @Input() centreY: number;
 
-  private readonly newShapeRadius: number = 20;
-  
   shapeListX: number;
   shapeListY: number;
   width: number;
@@ -51,35 +49,23 @@ export class ShapeSelectorListComponent implements OnInit, OnChanges {
   }
 
   offerRoundedRectangle() {
-    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre();
-
-    let potentialNewShape: Shape = new Circle(newShapeCentre[0], newShapeCentre[1], this.newShapeRadius, "red", "orange");
-    
-    this.documentService.createPotentialShape(potentialNewShape);
+    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre(Circle.defaultDiameter, Circle.defaultDiameter);
+    this.documentService.createPotentialShape(new Circle(newShapeCentre[0], newShapeCentre[1]));
   }
 
   offerRectangle() {
-    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre();
-
-    let potentialNewShape: Shape = new Circle(newShapeCentre[0], newShapeCentre[1], this.newShapeRadius, "green", "yellow");
-    
-    this.documentService.createPotentialShape(potentialNewShape);
+    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre(Rectangle.defaultWidth, Rectangle.defaultHeight);
+    this.documentService.createPotentialShape(new Rectangle(newShapeCentre[0], newShapeCentre[1]));
   }
 
   offerBorderedRectangle() {
-    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre();
-
-    let potentialNewShape: Shape = new Circle(newShapeCentre[0], newShapeCentre[1], this.newShapeRadius, "yellow", "green");
-    
-    this.documentService.createPotentialShape(potentialNewShape);
+    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre(Circle.defaultDiameter, Circle.defaultDiameter);
+    this.documentService.createPotentialShape(new Circle(newShapeCentre[0], newShapeCentre[1]));
   }
 
   offerDiamond() {
-    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre();
-
-    let potentialNewShape: Shape = new Circle(newShapeCentre[0], newShapeCentre[1], this.newShapeRadius, "blue", "red");
-    
-    this.documentService.createPotentialShape(potentialNewShape);
+    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre(Circle.defaultDiameter, Circle.defaultDiameter);
+    this.documentService.createPotentialShape(new Circle(newShapeCentre[0], newShapeCentre[1]));
   }
 
   removeOfferedShape() {
@@ -91,15 +77,15 @@ export class ShapeSelectorListComponent implements OnInit, OnChanges {
     this.documentService.clearActiveShape();
   }
 
-  private calculatePotentialShapeCentre() : [number, number] {
+  private calculatePotentialShapeCentre(newShapeWidth: number, newShapeHeight: number) : [number, number] {
     let newShapeX: number = this.centreX;
     let newShapeY: number = this.centreY;
 
     if (this.position == ShapeSelectionListPosition.Top || this.position == ShapeSelectionListPosition.Bottom) {
-      const offset: number = (this.height / 2) + this.newShapeRadius + Shape.strokeWidth;
+      const offset: number = ((this.height + newShapeHeight) / 2) + (Shape.strokeWidth * 2);
       newShapeY += this.position == ShapeSelectionListPosition.Bottom ? offset : -offset;
     } else {
-      const offset: number = (this.width / 2) + this.newShapeRadius + Shape.strokeWidth;
+      const offset: number = ((this.width  + newShapeWidth) / 2) + (Shape.strokeWidth * 2);
       newShapeX += this.position == ShapeSelectionListPosition.Right ? offset : -offset;
     }
     return [newShapeX, newShapeY];
