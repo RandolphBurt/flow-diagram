@@ -9,7 +9,7 @@ export class Shape {
 
     public shapeSelectorStatus: ShapeSelectorStatusFlags = ShapeSelectorStatusFlags.None;
 
-    public inShape: boolean = false;
+//    public inShape: boolean = false;
 //    public inSurroundingBubble: boolean = false;
 //    public inShapeSelector: boolean = false;
 
