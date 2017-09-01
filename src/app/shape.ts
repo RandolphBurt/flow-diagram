@@ -9,10 +9,9 @@ export class Shape {
 
     public shapeSelectorStatus: ShapeSelectorStatusFlags = ShapeSelectorStatusFlags.None;
 
-//    public inShape: boolean = false;
-//    public inSurroundingBubble: boolean = false;
-//    public inShapeSelector: boolean = false;
-
+    // Ideally might remove this and just check the shapeSelectorStatus flag isn't zero, 
+    // however due to the order of events (mose leave firing before mouse enter) the 
+    // shapeSelectorStatus flag can briefly go from InShape to None before going to InSurroundingBubble
     public showShapeSelector: boolean = false;
 
     constructor(

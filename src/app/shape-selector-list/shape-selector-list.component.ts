@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges  } from '@angular/core';
 import { Shape, ShapeSelectorStatusFlags } from "app/shape";
 import { ShapeSelectionListPosition } from "app/shape-selection-list-position.enum";
+import { DocumentService } from "app/document.service";
 
 @Component({
   selector: '[app-shape-selector-list]',
@@ -42,9 +43,76 @@ export class ShapeSelectorListComponent implements OnInit, OnChanges {
   // Do this to expose the enum to our template
   public ShapeSelectorStatusFlags = ShapeSelectorStatusFlags;
 
-  constructor() { }
+  constructor(private documentService: DocumentService) { }
 
   ngOnInit() {
+  }
+
+  offerRoundedRectangle() {
+    let newShapeRadius: number = 20;
+    let newShapeBorder: number = 2;
+
+    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre(newShapeRadius, newShapeBorder);
+
+    let potentialNewShape: Shape = new Shape(newShapeCentre[0], newShapeCentre[1], newShapeRadius, newShapeBorder, "red", "orange");
+    
+    this.documentService.createPotentialShape(potentialNewShape);
+  }
+
+  offerRectangle() {
+    let newShapeRadius: number = 20;
+    let newShapeBorder: number = 2;
+
+    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre(newShapeRadius, newShapeBorder);
+
+    let potentialNewShape: Shape = new Shape(newShapeCentre[0], newShapeCentre[1], newShapeRadius, newShapeBorder, "green", "yellow");
+    
+    this.documentService.createPotentialShape(potentialNewShape);
+  }
+
+  offerBorderedRectangle() {
+    let newShapeRadius: number = 20;
+    let newShapeBorder: number = 2;
+
+    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre(newShapeRadius, newShapeBorder);
+
+    let potentialNewShape: Shape = new Shape(newShapeCentre[0], newShapeCentre[1], newShapeRadius, newShapeBorder, "yellow", "green");
+    
+    this.documentService.createPotentialShape(potentialNewShape);
+  }
+
+  offerDiamond() {
+    let newShapeRadius: number = 20;
+    let newShapeBorder: number = 2;
+
+    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre(newShapeRadius, newShapeBorder);
+
+    let potentialNewShape: Shape = new Shape(newShapeCentre[0], newShapeCentre[1], newShapeRadius, newShapeBorder, "blue", "red");
+    
+    this.documentService.createPotentialShape(potentialNewShape);
+  }
+
+  removeOfferedShape() {
+    this.documentService.clearPotentialShape();
+  }
+
+  promoteOfferedShape() {
+    this.documentService.promotePotentialShape();
+    this.documentService.clearActiveShape();
+  }
+
+  private calculatePotentialShapeCentre(newShapeRadius: number, newShapeBorder: number) : [number, number] {
+    let newShapeX: number = this.centreX;
+    let newShapeY: number = this.centreY;
+
+    if (this.position == ShapeSelectionListPosition.Top || this.position == ShapeSelectionListPosition.Bottom) {
+      const offset: number = (this.height / 2) + newShapeRadius + newShapeBorder;
+      newShapeY += this.position == ShapeSelectionListPosition.Bottom ? offset : -offset;
+    } else {
+      const offset: number = (this.width / 2) + newShapeRadius + newShapeBorder;
+      newShapeX += this.position == ShapeSelectionListPosition.Right ? offset : -offset;
+    }
+    return [newShapeX, newShapeY];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -57,7 +125,7 @@ export class ShapeSelectorListComponent implements OnInit, OnChanges {
       let borderHeight = 6;
       
       this.width = shapeCount * shapeWidth + ((shapeCount + 1) * borderWidth); 
-      this.height = shapeHeight + (2 * borderHeight);;
+      this.height = shapeHeight + (2 * borderHeight);
 
       // Shape 1 - rectangle
       this.rectHeight = shapeHeight;

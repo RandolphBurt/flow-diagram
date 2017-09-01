@@ -10,6 +10,7 @@ import { DocumentService } from "app/document.service";
 })
 export class ShapeComponent implements OnInit {
   @Input('app-shape') shape: Shape;
+  @Input('app-is-potential-shape') isPotentialShape: boolean;
 
   // Do this to expose the enum to our template
   public ShapeSelectorStatusFlags = ShapeSelectorStatusFlags;

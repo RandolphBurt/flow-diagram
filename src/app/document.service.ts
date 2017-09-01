@@ -5,14 +5,16 @@ import { Shape, ShapeSelectorStatusFlags } from './shape'
 export class DocumentService {
   shapes: Shape[];
   activeShapeSelectorShape: Shape = null;
+  potentialNewShape: Shape = null;
 
   constructor() {
     this.shapes = [];
   }
   
-  private clearActiveShape() {
+  clearActiveShape() {
     this.activeShapeSelectorShape.showShapeSelector = false;
     this.activeShapeSelectorShape.shapeSelectorStatus = ShapeSelectorStatusFlags.None;
+    this.activeShapeSelectorShape = null;
   }
   
   isPointWithinShape(shape: Shape, x: number, y: number, additionalBorder: number = 0) {
@@ -73,7 +75,6 @@ export class DocumentService {
     if (this.activeShapeSelectorShape != null) {
       this.clearActiveShape();
     }
-    this.activeShapeSelectorShape = null;
   }
 
   deactivateShapeSelectorStatus(shape: Shape, activationType: ShapeSelectorStatusFlags) {
@@ -108,6 +109,21 @@ export class DocumentService {
 
     if (shape.showShapeSelector && !previousShow) {
       this.bringToFront(shape);
+    }
+  }
+
+  clearPotentialShape() {
+    this.potentialNewShape = null;
+  }
+
+  createPotentialShape(shape: Shape) {
+    this.potentialNewShape = shape;
+  }
+
+  promotePotentialShape() {
+    if (this.potentialNewShape != null) {
+      this.addShape(this.potentialNewShape);
+      this.potentialNewShape = null;
     }
   }
 }

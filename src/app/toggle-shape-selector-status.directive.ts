@@ -10,40 +10,43 @@ import { DocumentService } from "app/document.service";
   selector: '[appToggleShapeSelectorStatus]'
 })
 export class ToggleShapeSelectorStatusDirective {
-  mouseEnter: EventEmitter<MouseEvent>;
-  mouseLeave: EventEmitter<MouseEvent>;
+  mouseOverEmitter: EventEmitter<MouseEvent>;
+  mouseLeaveEmitter: EventEmitter<MouseEvent>;
 
   @Input() shape: Shape;
   @Input() activationType: ShapeSelectorStatusFlags;
   @Output() mouseOver: EventEmitter<any> = new EventEmitter<any>();
+  @Output() mouseLeave: EventEmitter<any> = new EventEmitter<any>();
 
   @HostListener('mouseover', ['$event']) onMouseOver(event: MouseEvent) {
-    this.mouseEnter.emit(event);
+    this.mouseOverEmitter.emit(event);
   }
 
   @HostListener('mouseleave', ['$event']) onMouseLeave(event: MouseEvent) {
-    this.mouseLeave.emit(event);
+    this.mouseLeaveEmitter.emit(event);
   }
 
   constructor(private documentService: DocumentService) { 
-      this.mouseEnter = new EventEmitter<MouseEvent>();
-      this.mouseLeave = new EventEmitter<MouseEvent>();
+      this.mouseOverEmitter = new EventEmitter<MouseEvent>();
+      this.mouseLeaveEmitter = new EventEmitter<MouseEvent>();
   }
 
   ngOnInit() {
-    this.mouseEnter.subscribe((event : any) => {
+    this.mouseOverEmitter.subscribe((event : any) => {
       // not pressing a button
       if (event.buttons === 0) {
-        this.documentService.activateShapeSelectorStatus(this.shape, this.activationType);
-        
+        this.documentService.activateShapeSelectorStatus(this.shape, this.activationType);        
         if (this.mouseOver) {
           this.mouseOver.emit();
         }
       }
     });
 
-    this.mouseLeave.subscribe((event: any) => {
-      this.documentService.deactivateShapeSelectorStatus(this.shape, this.activationType);
-    });
+    this.mouseLeaveEmitter.subscribe((event: any) => {
+      this.documentService.deactivateShapeSelectorStatus(this.shape, this.activationType);      
+      if (this.mouseLeave) {
+        this.mouseLeave.emit();
+      }
+  });
   }
 }
