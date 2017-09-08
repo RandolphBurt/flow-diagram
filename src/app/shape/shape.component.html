@@ -3,7 +3,7 @@
 <svg:circle *ngIf="shape.constructor.name == 'Circle' && shape.showShapeSelector"
     appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InSurroundingBubble"
     [attr.cx]="shape.centreX" [attr.cy]="shape.centreY" [attr.r]="shape.radius + shapeSelectorAdditionalDistance" 
-    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="1" [attr.fill-opacity]="0.0" 
+    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="0" [attr.fill-opacity]="0.0" 
     (click)="userClick()"/> <!-- Set stroke-width to 1 if debugging mouse in shape selector circle -->
     
 <svg:circle *ngIf="shape.constructor.name == 'Circle' && !isPotentialShape" 
@@ -24,7 +24,7 @@
     [attr.x]="shape.topLeftX - shapeSelectorAdditionalDistance" [attr.y]="shape.topLeftY - shapeSelectorAdditionalDistance" 
     [attr.width]="shape.width + (2 * shapeSelectorAdditionalDistance)" 
     [attr.height]="shape.height + (2 * shapeSelectorAdditionalDistance)" 
-    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="1" [attr.fill-opacity]="0.0" 
+    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="0" [attr.fill-opacity]="0.0" 
     (click)="userClick()"/> <!-- Set stroke-width to 1 if debugging mouse in shape selector circle -->
     
 <svg:rect *ngIf="shape.constructor.name == 'Rectangle' && !isPotentialShape" 
@@ -46,7 +46,7 @@
     [attr.rx]="shape.roundLengthX" [attr.ry]="shape.roundLengthY"
     [attr.width]="shape.width + (2 * shapeSelectorAdditionalDistance)" 
     [attr.height]="shape.height + (2 * shapeSelectorAdditionalDistance)" 
-    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="1" [attr.fill-opacity]="0.0" 
+    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="0" [attr.fill-opacity]="0.0" 
     (click)="userClick()"/> <!-- Set stroke-width to 1 if debugging mouse in shape selector circle -->
 
 <svg:rect *ngIf="shape.constructor.name == 'RoundedRectangle' && !isPotentialShape" 
@@ -67,7 +67,7 @@
 <svg:polygon *ngIf="shape.constructor.name == 'Diamond' && shape.showShapeSelector"
     appToggleShapeSelectorStatus [shape]="shape" [activationType]="ShapeSelectorStatusFlags.InSurroundingBubble"
     [attr.points]="shape.surroundingAreaPoints" 
-    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="1" [attr.fill-opacity]="0.0" 
+    [attr.stroke]="shape.strokeColour"  [attr.stroke-width]="0" [attr.fill-opacity]="0.0" 
     (click)="userClick()"/> <!-- Set stroke-width to 1 if debugging mouse in shape selector circle -->
 
 <svg:polygon *ngIf="shape.constructor.name == 'Diamond' && !isPotentialShape" 
