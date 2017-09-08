@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges  } from '@angular/core';
-import { Shape, ShapeSelectorStatusFlags, Circle, Rectangle, RoundedRectangle } from "app/shape";
+import { Shape, ShapeSelectorStatusFlags, Circle, Rectangle, RoundedRectangle, Diamond } from "app/shape";
 import { ShapeSelectionListPosition } from "app/shape-selection-list-position.enum";
 import { DocumentService } from "app/document.service";
 
@@ -64,8 +64,8 @@ export class ShapeSelectorListComponent implements OnInit, OnChanges {
   }
 
   offerDiamond() {
-    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre(Circle.defaultDiameter, Circle.defaultDiameter);
-    this.documentService.createPotentialShape(new Circle(newShapeCentre[0], newShapeCentre[1]));
+    const newShapeCentre: [number, number] = this.calculatePotentialShapeCentre(Diamond.defaultWidth, Diamond.defaultHeight);
+    this.documentService.createPotentialShape(new Diamond(newShapeCentre[0], newShapeCentre[1]));
   }
 
   removeOfferedShape() {

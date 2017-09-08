@@ -18,7 +18,7 @@ export class ShapeComponent implements OnInit {
   // Do this to expose the enum to our template
   public ShapeSelectorStatusFlags = ShapeSelectorStatusFlags;
 
-  shapeSelectorAdditionalDistance: number = this.constantsService.shapeSelectorAdditionalDistance;
+  shapeSelectorAdditionalDistance: number = Shape.shapeSelectorAdditionalDistance;
   potentialShapeFillColour: string = this.constantsService.potentialShapeFillColour;
   potentialShapeStrokeColour: string = this.constantsService.potentialShapeStrokeColour;
 

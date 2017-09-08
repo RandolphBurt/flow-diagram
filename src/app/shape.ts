@@ -7,7 +7,8 @@ export enum ShapeSelectorStatusFlags {
 }
 
 export abstract class Shape {
-
+    static shapeSelectorAdditionalDistance: number = 50;
+    
     shapeSelectorStatus: ShapeSelectorStatusFlags = ShapeSelectorStatusFlags.None;
 
     // Ideally might remove this and just check the shapeSelectorStatus flag isn't zero, 
@@ -61,19 +62,22 @@ export class Rectangle extends Shape {
 
     constructor(centreX: number, centreY: number) {
         super(centreX, centreY, Rectangle.defaultWidth, Rectangle.defaultHeight, "powderblue", "grey");
+        this.setCoordinates();
+    }
+
+    private setCoordinates() {
         this.topLeftX = this.centreX - (this.width / 2);
         this.topLeftY = this.centreY - (this.height / 2);
     }
 
     moveTo(centreX: number, centreY: number) {
         super.moveTo(centreX, centreY);
-        this.topLeftX = this.centreX - (this.width / 2);
-        this.topLeftY = this.centreY - (this.height / 2);
+        this.setCoordinates();
     }
 
     isPointWithinShape(x: number, y: number, additionalBorder: number = 0) {
-        if (x >= this.topLeftX && x <= this.topLeftX + this.width && 
-            y >= this.topLeftY && y <= this.topLeftY + this.height) {
+        if (x >= (this.topLeftX - additionalBorder) && x <= (this.topLeftX + this.width + additionalBorder) && 
+            y >= (this.topLeftY - additionalBorder) && y <= (this.topLeftY + this.height + additionalBorder)) {
           return true;
         }
         return false;
@@ -91,23 +95,68 @@ export class RoundedRectangle extends Shape {
 
     constructor(centreX: number, centreY: number) {
         super(centreX, centreY, Rectangle.defaultWidth, Rectangle.defaultHeight, "powderblue", "grey");
-        this.topLeftX = this.centreX - (this.width / 2);
-        this.topLeftY = this.centreY - (this.height / 2);
         this.roundLengthX = this.width / 4;
         this.roundLengthY = this.height / 2;
+        this.setCoordinates();
+    }
+
+    private setCoordinates() {
+        this.topLeftX = this.centreX - (this.width / 2);
+        this.topLeftY = this.centreY - (this.height / 2);
     }
 
     moveTo(centreX: number, centreY: number) {
         super.moveTo(centreX, centreY);
-        this.topLeftX = this.centreX - (this.width / 2);
-        this.topLeftY = this.centreY - (this.height / 2);
+        this.setCoordinates();
     }
 
     isPointWithinShape(x: number, y: number, additionalBorder: number = 0) {
-        if (x >= this.topLeftX && x <= this.topLeftX + this.width && 
-            y >= this.topLeftY && y <= this.topLeftY + this.height) {
+        if (x >= (this.topLeftX - additionalBorder) && x <= (this.topLeftX + this.width + additionalBorder) && 
+            y >= (this.topLeftY - additionalBorder) && y <= (this.topLeftY + this.height + additionalBorder)) {
           return true;
         }
         return false;
     } 
+}
+
+export class Diamond extends Shape {
+    static defaultWidth: number = 60;
+    static defaultHeight: number = 40;
+    
+    private leftX: number;
+    private rightX: number;
+    private topY: number;
+    private bottomY: number;
+    private points: string;
+    private surroundingAreaPoints: string;
+    
+    constructor(centreX: number, centreY: number) {
+        super(centreX, centreY, Diamond.defaultWidth, Diamond.defaultHeight, "powderblue", "grey");
+        this.setCoordinates();
+    }
+
+    private setCoordinates() {
+        this.leftX = this.centreX - (this.width / 2);
+        this.rightX = this.centreX + (this.width / 2);
+        this.topY = this.centreY - (this.height / 2);
+        this.bottomY = this.centreY + (this.height / 2);
+        this.points = `${this.leftX},${this.centreY} ${this.centreX},${this.topY} ${this.rightX},${this.centreY} ${this.centreX},${this.bottomY}`;
+        this.surroundingAreaPoints = `
+            ${this.leftX - Diamond.shapeSelectorAdditionalDistance},${this.centreY} 
+            ${this.centreX},${this.topY - Diamond.shapeSelectorAdditionalDistance} 
+            ${this.rightX + Diamond.shapeSelectorAdditionalDistance},${this.centreY} 
+            ${this.centreX},${this.bottomY  + Diamond.shapeSelectorAdditionalDistance}`;
+        }
+
+    isPointWithinShape(x: number, y: number, additionalBorder: number) {
+        var dx = Math.abs(x - this.centreX);
+        var dy = Math.abs(y - this.centreY);
+        var d = (dx / (this.width + (2 * additionalBorder))) + (dy / (this.height + (2 * additionalBorder)));
+        return d <= 0.5;
+    }
+
+    moveTo(centreX: number, centreY: number) {
+        super.moveTo(centreX, centreY);
+        this.setCoordinates();
+    }
 }
